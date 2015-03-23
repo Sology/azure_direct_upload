@@ -11,9 +11,10 @@ module AzureDirectUpload
     class AzureUploader
       def initialize(view_context, options)
         @options = options.reverse_merge(
-          max_file_size: 500.megabytes,
+          max_file_size: 200.gigabytes,
           sas_url: view_context.azure_direct_upload.sas_sign_url,
-          sas_permissions: "w",
+          commit_url: view_context.azure_direct_upload.upload_commit_url,
+          sas_permissions: "rw",
           sas_expiration: 30.minutes,
           callback_url: nil,
           callback_method: "POST",
@@ -36,6 +37,7 @@ module AzureDirectUpload
           multipart: false,
           data: {
             sas_url: @options[:sas_url],
+            commit_url: @options[:commit_url],
             sas_permissions: @options[:sas_permissions],
             sas_expiration: @options[:sas_expiration],
             callback_url: @options[:callback_url],

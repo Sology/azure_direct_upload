@@ -1,10 +1,8 @@
 module AzureDirectUpload
   class SasController < ApplicationController
-    protect_from_forgery with: :exception
-
     def sign
       bs = Azure::Blob::BlobService.new
-      @uri = bs.generate_uri "#{container_name}/#{blob_name}"
+      @uri = bs.generate_uri "#{container_name}/#{blob_name}", {comp: "block", blockid: "BLOCK_ID"}
 
       signer = Azure::Contrib::Auth::SharedAccessSignature.new(@uri, {
         resource:    "b",
@@ -33,7 +31,7 @@ module AzureDirectUpload
     end
 
     def start_time
-      Time.now
+      Time.now - 10.seconds
     end
 
     def expiration_time
