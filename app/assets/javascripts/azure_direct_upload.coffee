@@ -17,7 +17,6 @@ $.fn.azure_direct_upload = (options) ->
     return this
 
   form = this
-  chunksent = false
 
   settings =
     path: ''
@@ -62,6 +61,7 @@ $.fn.azure_direct_upload = (options) ->
           complete:   ( xhr, status )         -> form.trigger( 'ajax:complete', [xhr, status] )
           success:    ( response_data, status, xhr )   ->
             data.files[0].blockno = 0
+            data.files[0].chunksent = false
             data.files[0].base_url = response_data.uri
             data.url = data.files[0].base_url.replace("BLOCK_ID", btoa(pad(data.files[0].blockno, 5)))
             form.trigger( 'ajax:success', [data, status, xhr] )
@@ -105,11 +105,11 @@ $.fn.azure_direct_upload = (options) ->
         settings.callbacks.submit(data) if settings.callbacks.submit
 
       chunksend: (e, data) =>
-        if chunksent
+        if data.files[0].chunksent
           data.files[0].blockno++
           data.url = data.files[0].base_url.replace("BLOCK_ID", btoa(pad(data.files[0].blockno, 5)))
 
-        chunksent = true
+        data.files[0].chunksent = true
         settings.callbacks.chunksend(data) if settings.callbacks.chunksend
       chunkdone: (e, data) =>
         settings.callbacks.chunkdone(data) if settings.callbacks.chunkdone
