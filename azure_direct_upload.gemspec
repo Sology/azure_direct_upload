@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-fileupload-rails', '~> 0.4.1'
   s.add_dependency 'azure', '~> 0.6.4'
   s.add_dependency 'azure-contrib', '~> 0.0.12'
+  s.add_dependency 'addressable', '~> 2.3.8'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"

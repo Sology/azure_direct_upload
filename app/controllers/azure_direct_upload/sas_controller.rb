@@ -2,7 +2,7 @@ module AzureDirectUpload
   class SasController < ApplicationController
     def sign
       bs = Azure::Blob::BlobService.new
-      @uri = bs.generate_uri "#{container_name}/#{blob_name}", {comp: "block", blockid: "BLOCK_ID"}
+      @uri = bs.generate_uri Addressable::URI.escape("#{container_name}/#{blob_name}"), {comp: "block", blockid: "BLOCK_ID"}
 
       signer = Azure::Contrib::Auth::SharedAccessSignature.new(@uri, {
         resource:    "b",
