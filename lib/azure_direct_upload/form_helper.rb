@@ -1,9 +1,9 @@
 module AzureDirectUpload
   module UploadHelper
-    def azure_upload_form(options = {}, &block)
+    def azure_upload_box(options = {}, &block)
       uploader = AzureUploader.new(self, options)
 
-      form_tag(uploader.url, uploader.form_options) do
+      content_tag(:div, uploader.form_options) do
         capture(&block)
       end
     end
@@ -32,9 +32,6 @@ module AzureDirectUpload
         {
           id: @options[:html][:id],
           class: @options[:html][:class],
-          method: "PUT",
-          authenticity_token: false,
-          multipart: false,
           data: {
             sas_url: @options[:sas_url],
             commit_url: @options[:commit_url],
