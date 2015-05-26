@@ -2,12 +2,12 @@ PATH
   remote: .
   specs:
     azure_direct_upload (0.0.1)
+      addressable (>= 2.2.4)
       azure (~> 0.6.4)
       azure-contrib (~> 0.0.12)
       coffee-rails (>= 3.1)
       jquery-fileupload-rails (~> 0.4.1)
       rails (~> 4.1.6)
-      sass-rails (>= 3.1)
 
 GEM
   remote: https://rubygems.org/
@@ -120,12 +120,6 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     sass (3.4.13)
-    sass-rails (5.0.1)
-      railties (>= 4.0.0, < 5.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (~> 1.1)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
